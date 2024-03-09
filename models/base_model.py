@@ -1,9 +1,10 @@
 import uuid
+import unittest
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
-
     def __init__(self, *args, **kwargs):
         if kwargs:
             for key, value in kwargs.items():
@@ -18,6 +19,7 @@ class BaseModel:
                 self.id = str(uuid.uuid4())
             if "created_at" not in kwargs:
                 self.created_at = self.updated_at = datetime.now()
+                storage.new(self)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
@@ -26,7 +28,7 @@ class BaseModel:
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
-        self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         obj_dict = self.__dict__.copy()
@@ -34,3 +36,7 @@ class BaseModel:
         obj_dict["created_at"] = self.created_at.isoformat()
         obj_dict["updated_at"] = self.updated_at.isoformat()
         return obj_dict
+
+
+if __name__ == "__main__":
+    unittest.main()
