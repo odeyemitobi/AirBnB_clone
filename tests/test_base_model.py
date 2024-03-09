@@ -1,10 +1,21 @@
 #!/usr/bin/python3
+"""
+Unit tests for BaseModel
+"""
+
+import sys
+sys.path.append('..')
 import unittest
 from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
+    """
+    Test cases for BaseModel
+    """
+
     def test_base_model(self):
+        """Test BaseModel attributes and methods"""
         my_model = BaseModel()
         my_model.name = "My First Model"
         my_model.my_number = 89
