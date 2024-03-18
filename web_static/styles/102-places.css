@@ -149,3 +149,15 @@ article {
 .reviews ul li p {
   font-size: 12px;
 }
+
+@media (max-width: 768px) {
+  .places .flexible {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .places .flexible article {
+    width: 100%;
+    max-width: 400px;
+  }
+}
